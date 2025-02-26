@@ -10,7 +10,7 @@ Deploy your [Vite](https://vitejs.dev/guide/) application to Github Pages, at a 
 
 ```
 - name: Vite Github Pages Deployer
-  uses: skywarth/vite-github-pages-deployer@v1.3.0
+  uses: skywarth/vite-github-pages-deployer@v1.4.0
 ```
 
 
@@ -36,7 +36,7 @@ Make sure to place this step after your 'checkout' step.
 
 ```yaml
 - name: Vite Github Pages Deployer
-  uses: skywarth/vite-github-pages-deployer@v1.2.0
+  uses: skywarth/vite-github-pages-deployer@v1.4.0
   id: deploy_to_pages
 ```
 
@@ -193,6 +193,38 @@ Desired name for the exposed artifact. This name is visible in job and used as t
 | `string` | `npm`   | - `npm` <br/> - `yarn` |
 
 Indicate the package manager of preferrence. It'll be used for installing dependencies and building the `dist`. For example if you prefer/use `yarn` as your package manager for the project, then you may pass `package_manager: 'yarn'` as input which then will be used as `yarn install` and `yarn build`.
+
+
+### `working_path` (optional)
+| Type     | Default   | Example Values               |
+|----------|-----------|------------------------------|
+| `string` | `./`      | - './app' <br/> `./example` |
+
+
+Specifies the directory where the install, build, and deploy commands should be executed.
+
+**Example:**
+
+If your project structure looks like this:
+
+```text
+app/
+  package.json
+  ...
+README.md
+```
+
+You can set the `working_path` to `./app` to ensure the commands run in the correct directory:
+
+```yaml
+with:
+  working_path: ./app
+```
+
+#### Acknowledgement 
+
+Many thanks to [@sondalex](https://github.com/sondalex) for proposing the idea and implementing the necessary changes to support working directory option. See the related [PR](https://github.com/skywarth/vite-github-pages-deployer/pull/14) for details and discussion. 
+
 
 ### `debug_mode` (optional)
 | Type     | Default   | Example Values               |
